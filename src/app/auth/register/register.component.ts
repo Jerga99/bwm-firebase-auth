@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   formData: any = {username: 'Filip'};
   errors: any[] = [];
@@ -15,18 +15,22 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService,
               private router: Router) { }
 
-  ngOnInit() {
-  }
 
   register() {
     console.log(this.formData);
 
-    this.auth.register(this.formData).subscribe(
-      () => {
+    this.auth.firebaseRegister(this.formData)
+      .then((data) => {
         this.router.navigate(['/login', {registered: 'success'}]);
-      },
-      (errorResponse) => {
-        this.errors = errorResponse.error.errors;
       })
+      .catch(() => console.error('Cannot Login!'))
+
+    // this.auth.register(this.formData).subscribe(
+    //   () => {
+    //     this.router.navigate(['/login', {registered: 'success'}]);
+    //   },
+    //   (errorResponse) => {
+    //     this.errors = errorResponse.error.errors;
+    //   })
   }
 }

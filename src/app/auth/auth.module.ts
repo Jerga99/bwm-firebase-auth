@@ -11,6 +11,10 @@ import { AuthService } from './shared/auth.service';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptor } from './shared/token.interceptor';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]}
@@ -30,6 +34,9 @@ const routes: Routes = [
   providers: [
     AuthService,
     AuthGuard,
+    AngularFireAuth,
+    AngularFirestore,
+    AngularFireDatabase,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

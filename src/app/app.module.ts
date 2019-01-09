@@ -14,6 +14,9 @@ import { AuthModule } from './auth/auth.module';
 import { ManageModule } from './manage/manage.module';
 import { UserModule } from './user/user.module';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full'}
 ]
@@ -32,7 +35,8 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ManageModule,
-    UserModule
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]
